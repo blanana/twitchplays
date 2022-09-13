@@ -14,7 +14,7 @@ add new commands with time_value:
 - add the command
   
 with mouse movement:
-- add a new tme_value limit and pixel calculation to main.py (optional)
+- add a new time_value limit and pixel calculation to main.py (optional)
 - add the command
   
 without time_value:
