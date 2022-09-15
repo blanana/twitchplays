@@ -1,4 +1,6 @@
-This is a twitch bot that executes commands on your computer
+This is a twitch bot that executes commands on your computer.\
+Current features:\
+mouse control, keyboard control, specifying the holding time in the message
   
 start the bot:
 - make sure the libraries are installed
