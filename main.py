@@ -3,6 +3,7 @@ import socket
 import userinfo
 import threading
 import pydirectinput
+import mouse
 
 from input_handler import InputHandler, InputKey, EventKind
 
@@ -170,8 +171,8 @@ def process_input(message):
             case "3":
                 input_handler.register_keypress(0, 0.1, InputKey.THREE)
 
-            case "tab":
-                pydirectinput.click
+            case "click":
+                mouse.click('left')
 
             case "stop":
                 input_handler.stop_all()
