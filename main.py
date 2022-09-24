@@ -1,9 +1,10 @@
+import time
+import mouse
 import socket
 import userinfo
+import keyboard
 import threading
 import pydirectinput
-import keyboard
-import mouse
 
 from input_handler import InputHandler, InputKey, EventKind
 
@@ -196,3 +197,4 @@ def process_input(message):
 while True:
     if keyboard.is_pressed('l'):
         fucking_stop()
+        time.sleep(0.5)
