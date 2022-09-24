@@ -107,7 +107,7 @@ def twitch():
                     continue
                 print(user.title() + " : " + message)
                 process_input(message)
-
+                
 def fucking_stop():
     global stop
     if stop == 0:
