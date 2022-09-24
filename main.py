@@ -107,29 +107,35 @@ def twitch():
                     continue
                 print(user.title() + " : " + message)
                 process_input(message)
-                
-def fucking_stop():
+
+def fuckingstop():
     global stop
     if stop == 0:
         stop = 1
         print('diabled')
+        time.sleep(0.5)
         return
-            
+
     if stop == 1:
         stop = 0
         print('enabled')
+        time.sleep(0.5)
         return
 
 def idontknow():
     while True:
         if keyboard.is_pressed('l'):
-            fucking_stop()
-            time.sleep(0.5)
+            fuckingstop()
+
+# -----------------------------------------------------------------------------------------------------------------------
 
 t1 = threading.Thread(target=twitch)
-t1.start()
+t2 = threading.Thread(target=idontknow)
 
-# -----------------------------------------------------------------------------------------------------------------------        
+t1.start()
+t2.start()
+
+# -----------------------------------------------------------------------------------------------------------------------
 
 def process_input(message):
 
@@ -197,10 +203,3 @@ def process_input(message):
 
                 case "stop":
                     input_handler.stop_all()
-
-# -----------------------------------------------------------------------------------------------------------------------   
-
-while True:
-    if keyboard.is_pressed('l'):
-        fucking_stop()
-        time.sleep(0.5)
