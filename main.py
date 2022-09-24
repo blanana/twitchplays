@@ -1,4 +1,3 @@
-from pickle import TRUE
 import socket
 import userinfo
 import threading
@@ -109,12 +108,15 @@ def twitch():
                 process_input(message)
 
 def fucking_stop():
+    global stop
     if stop == 0:
         stop = 1
+        print('diabled')
         return
             
     if stop == 1:
         stop = 0
+        print('enabled')
         return
 
 t1 = threading.Thread(target=twitch)
@@ -191,6 +193,6 @@ def process_input(message):
 
 # -----------------------------------------------------------------------------------------------------------------------   
 
-while TRUE:
+while True:
     if keyboard.is_pressed('l'):
         fucking_stop()
