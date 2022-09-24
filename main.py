@@ -1,8 +1,9 @@
-from dotenv import load_dotenv
+from pickle import TRUE
 import socket
 import userinfo
 import threading
 import pydirectinput
+import keyboard
 import mouse
 
 from input_handler import InputHandler, InputKey, EventKind
@@ -10,7 +11,7 @@ from input_handler import InputHandler, InputKey, EventKind
 global special_char
 global capital_char
 global command_cooldown
-
+global stop
 
 command_cooldown = []
 special_char = ['!', '@', "#", "$", "%", "^", "&", "*", "(", ")", "?", ]
@@ -19,6 +20,7 @@ capital_char = ['A', "B", 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
 
 message = ' '
 user = ' '
+stop = 1
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -106,6 +108,15 @@ def twitch():
                 print(user.title() + " : " + message)
                 process_input(message)
 
+def fucking_stop():
+    if stop == 0:
+        stop = 1
+        return
+            
+    if stop == 1:
+        stop = 0
+        return
+
 t1 = threading.Thread(target=twitch)
 t1.start()
 
@@ -115,64 +126,71 @@ def process_input(message):
 
     message_parts = message.split(" ")
 
-    try:
-        command = message_parts[0].lower()
-        time_value = float(message_parts[1])
+    if stop == 0:
+        try:
+            command = message_parts[0].lower()
+            time_value = float(message_parts[1])
 
-        if time_value < 11 and time_value > 0:
-            match command:
-                case "w": input_handler.register_keypress(0, time_value, InputKey.W)
-                case "a": input_handler.register_keypress(0, time_value, InputKey.A)
-                case "s": input_handler.register_keypress(0, time_value, InputKey.S)
-                case "d": input_handler.register_keypress(0, time_value, InputKey.D)
-                case "run":
-                    input_handler.register_keypress(0, time_value, InputKey.SHIFT)
-                    input_handler.register_keypress(0, time_value, InputKey.W)
-
-
-        if time_value < 361 and time_value > 0:
-            pixels = int(time_value*(1520/360))
-            match command:
-                case "right": pydirectinput.move(pixels, None)
-                case "left":  pydirectinput.move(-pixels, None)
-                case "up":    pydirectinput.move(None, -pixels)
-                case "down":  pydirectinput.move(None, pixels)
+            if time_value < 11 and time_value > 0:
+                match command:
+                    case "w": input_handler.register_keypress(0, time_value, InputKey.W)
+                    case "a": input_handler.register_keypress(0, time_value, InputKey.A)
+                    case "s": input_handler.register_keypress(0, time_value, InputKey.S)
+                    case "d": input_handler.register_keypress(0, time_value, InputKey.D)
+                    case "run":
+                        input_handler.register_keypress(0, time_value, InputKey.SHIFT)
+                        input_handler.register_keypress(0, time_value, InputKey.W)
 
 
+            if time_value < 361 and time_value > 0:
+                pixels = int(time_value*(1520/360))
+                match command:
+                    case "right": pydirectinput.move(pixels, None)
+                    case "left":  pydirectinput.move(-pixels, None)
+                    case "up":    pydirectinput.move(None, -pixels)
+                    case "down":  pydirectinput.move(None, pixels)
 
-    except (ValueError, IndexError):
-        match message.lower():
-            case "jump":
-                input_handler.register_keypress(0, 0.2, InputKey.SPACE)
 
-            case "jump w":
-                input_handler.register_keypress(0, 0.7, InputKey.W)
-                input_handler.register_keypress(0.1, 0.2, InputKey.SPACE)
 
-            case "use":
-                input_handler.register_keypress(0, 5, InputKey.E)
+        except (ValueError, IndexError):
+            match message.lower():
+                case "jump":
+                    input_handler.register_keypress(0, 0.2, InputKey.SPACE)
 
-            case "call":
-                input_handler.register_keypress(0, 0.1, InputKey.Q)
+                case "jump w":
+                    input_handler.register_keypress(0, 0.7, InputKey.W)
+                    input_handler.register_keypress(0.1, 0.2, InputKey.SPACE)
 
-            case "sneak":
-                input_handler.register_keypress(0, 0.1, InputKey.CTRL)
-                input_handler.register_keypress(5.1, 0.1, InputKey.CTRL)
+                case "use":
+                    input_handler.register_keypress(0, 5, InputKey.E)
 
-            case "tab":
-                input_handler.register_keypress(0, 0.1, InputKey.TAB)
+                case "call":
+                    input_handler.register_keypress(0, 0.1, InputKey.Q)
 
-            case "1":
-                input_handler.register_keypress(0, 0.1, InputKey.ONE)
+                case "sneak":
+                    input_handler.register_keypress(0, 0.1, InputKey.CTRL)
+                    input_handler.register_keypress(5.1, 0.1, InputKey.CTRL)
 
-            case "2":
-                input_handler.register_keypress(0, 0.1, InputKey.TWO)
+                case "tab":
+                    input_handler.register_keypress(0, 0.1, InputKey.TAB)
 
-            case "3":
-                input_handler.register_keypress(0, 0.1, InputKey.THREE)
+                case "1":
+                    input_handler.register_keypress(0, 0.1, InputKey.ONE)
 
-            case "click":
-                mouse.click('left')
+                case "2":
+                    input_handler.register_keypress(0, 0.1, InputKey.TWO)
 
-            case "stop":
-                input_handler.stop_all()
+                case "3":
+                    input_handler.register_keypress(0, 0.1, InputKey.THREE)
+
+                case "click":
+                    mouse.click('left')
+
+                case "stop":
+                    input_handler.stop_all()
+
+# -----------------------------------------------------------------------------------------------------------------------   
+
+while TRUE:
+    if keyboard.is_pressed('l'):
+        fucking_stop()
