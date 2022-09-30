@@ -373,7 +373,7 @@ def process_input(message):
 
 # ---------------------------------------------------------------------------
 
-    if user.lower() == 'blanana_m' or 'astralspiff':
+    if user.lower() == 'blanana_m' or 'astralspiff': # user specific commands
         match message:
 
         # toggle individual cameras
