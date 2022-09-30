@@ -5,7 +5,6 @@ import userinfo
 import keyboard
 import threading
 import pydirectinput
-import win32com.client as wincl
 
 global special_char
 global capital_char
@@ -65,8 +64,6 @@ cam4b = 0
 cam5  = 0
 cam6  = 0
 cam7  = 0
-
-speak = wincl.Dispatch("SAPI.SpVoice")
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -165,6 +162,7 @@ def camera(cam, x, y):
         return
 
 # ---------------------------------------------------------------------------
+# stop function
 
 def please_stop():
     global stop
@@ -372,11 +370,11 @@ def process_input(message):
     global cam6
     global cam7
 
-
 # ---------------------------------------------------------------------------
+# streamer commands
 
     try:
-        if user.lower() == 'blanana_m' or 'astralspiff':
+        if user.lower() == 'username':
             match message:
 
         # toggle individual cameras
@@ -499,6 +497,7 @@ def process_input(message):
                         print('all cams enabled')
 
 # ---------------------------------------------------------------------------
+# player commands
 
     except (ValueError, IndexError):
         if stop == 0:
