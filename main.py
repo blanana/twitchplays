@@ -11,6 +11,7 @@ global capital_char
 global command_cooldown
 global message
 
+
 global direction
 global stop
 global cams
@@ -162,7 +163,6 @@ def camera(cam, x, y):
         return
 
 # ---------------------------------------------------------------------------
-# stop function
 
 def please_stop():
     global stop
@@ -183,6 +183,7 @@ def please_stop():
 
 def hotkey():
     global direction
+    global stop
     global cams
 
     global Ldoor
@@ -371,20 +372,18 @@ def process_input(message):
     global cam7
 
 # ---------------------------------------------------------------------------
-# streamer commands
 
-    try:
-        if user.lower() == 'username':
-            match message:
+    if user.lower() == 'blanana_m' or 'astralspiff':
+        match message:
 
         # toggle individual cameras
-                case "s_cam1a":
+                case "s_start":
                     if cam1a == 1:
                         cam1a = 0
-                        print('cam1a disabled')
+                        print('start disabled')
                     else:
                         cam1a = 1
-                        print('cam1a enabled')
+                        print('start enabled')
 
                 case "s_cam1b":
                     if cam1b == 1:
@@ -394,13 +393,13 @@ def process_input(message):
                         cam1b = 1
                         print('cam1b enabled')
 
-                case "s_cam1c":
+                case "s_foxy":
                     if cam1c == 1:
                         cam1c = 0
-                        print('cam1c disabled')
+                        print('foxy disabled')
                     else:
                         cam1c = 1
-                        print('cam1c enabled')
+                        print('foxy enabled')
 
                 case "s_cam2a":
                     if cam2a == 1:
@@ -497,11 +496,9 @@ def process_input(message):
                         print('all cams enabled')
 
 # ---------------------------------------------------------------------------
-# player commands
 
-    except (ValueError, IndexError):
-        if stop == 0:
-            match message.lower():
+    if stop == 0:
+        match message.lower():
 
             # Left door
                 case "ldoor":
@@ -588,7 +585,7 @@ def process_input(message):
                         return
 
             # different cams
-                case "cam1a":
+                case "start":
                     if cam1a == 1:
                         camera(cams, 980,350)
 
@@ -596,7 +593,7 @@ def process_input(message):
                     if cam1b == 1:
                         camera(cams, 980,400)
 
-                case "cam1c":
+                case "foxy":
                     if cam1c == 1:
                         camera(cams, 920,480)
 
