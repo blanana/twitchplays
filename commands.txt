@@ -27,4 +27,4 @@ click - clicks left mouse button
 2 - presses 2 for 0.1 seconds
 3 - presses 3 for 0.1 seconds
 
-*also works with decimal values, use . as the decimal point
+*also works with float vaues
