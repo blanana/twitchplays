@@ -1,10 +1,8 @@
 import time
-import mouse
 import socket
 import userinfo
 import keyboard
 import threading
-import pydirectinput
 
 from input_handler import InputHandler, InputKey, EventKind
 
@@ -12,6 +10,7 @@ global stop
 
 message = ' '
 user = ' '
+
 stop = 1
 
 # -----------------------------------------------------------------------------------------------------------------------
@@ -102,24 +101,20 @@ def twitch():
 
 # -----------------------------------------------------------------------------------------------------------------------
 
-def pleasestop():
-    global stop
-    if stop == 0:
-        stop = 1
-        print('diabled')
-        time.sleep(0.5)
-        return
-
-    if stop == 1:
-        stop = 0
-        print('enabled')
-        time.sleep(0.5)
-        return
-
 def hotkey():
     while True:
         if keyboard.is_pressed('l'):
-            pleasestop()
+            if stop == 0:
+                stop = 1
+                print('commmands diabled')
+                time.sleep(0.2)
+                return
+
+            if stop == 1:
+                stop = 0
+                print('commmands enabled')
+                time.sleep(0.2)
+                return
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -135,65 +130,44 @@ def process_input(message):
 
     message_parts = message.split(" ")
 
-    if stop == 0:
-        try:
-            command = message_parts[0].lower()
-            time_value = float(message_parts[1])
+    try:
+        command = message_parts[0].lower()
+        time_value = float(message_parts[1])
 
-            if time_value < 11 and time_value > 0:
+        if time_value < 26 and time_value > 0:
+            if stop == 0:
                 match command:
-                    case "w": input_handler.register_keypress(0, time_value, InputKey.W)
-                    case "a": input_handler.register_keypress(0, time_value, InputKey.A)
-                    case "s": input_handler.register_keypress(0, time_value, InputKey.S)
-                    case "d": input_handler.register_keypress(0, time_value, InputKey.D)
-                    case "run":
-                        input_handler.register_keypress(0, time_value, InputKey.SHIFT)
-                        input_handler.register_keypress(0, time_value, InputKey.W)
+                    case "right": input_handler.register_keypress(0, time_value, InputKey.RIGHT)
+                    case "left":  input_handler.register_keypress(0, time_value, InputKey.LEFT)
+                    case "up":    input_handler.register_keypress(0, time_value, InputKey.UP)
+                    case "down":  input_handler.register_keypress(0, time_value, InputKey.DOWN)
 
 
-            if time_value < 361 and time_value > 0:
-                pixels = int(time_value*(1520/360))
-                match command:
-                    case "right": pydirectinput.move(pixels, None)
-                    case "left":  pydirectinput.move(-pixels, None)
-                    case "up":    pydirectinput.move(None, -pixels)
-                    case "down":  pydirectinput.move(None, pixels)
-
-
-
-        except (ValueError, IndexError):
+    except (ValueError, IndexError):
+        if stop == 0:
             match message.lower():
                 case "jump":
-                    input_handler.register_keypress(0, 0.2, InputKey.SPACE)
+                    input_handler.register_keypress(0, 0.1, InputKey.UP)
 
-                case "jump w":
-                    input_handler.register_keypress(0, 0.7, InputKey.W)
-                    input_handler.register_keypress(0.1, 0.2, InputKey.SPACE)
+                case "jump right":
+                    input_handler.register_keypress(0, 0.2, InputKey.RIGHT)
+                    input_handler.register_keypress(0.1, 0.1, InputKey.UP)
+
+                case "jump left":
+                    input_handler.register_keypress(0, 0.2, InputKey.LEFT)
+                    input_handler.register_keypress(0.1, 0.1, InputKey.UP)
 
                 case "use":
-                    input_handler.register_keypress(0, 5, InputKey.E)
+                    input_handler.register_keypress(0, 0.3, InputKey.GRAB)
 
-                case "call":
-                    input_handler.register_keypress(0, 0.1, InputKey.Q)
+                case "hold":
+                    input_handler.register_event(0, InputKey.GRAB, EventKind.PRESS)
 
-                case "sneak":
-                    input_handler.register_keypress(0, 0.1, InputKey.CTRL)
-                    input_handler.register_keypress(5.1, 0.1, InputKey.CTRL)
+                case "release":
+                    input_handler.register_event(0, InputKey.GRAB, EventKind.RELEASE)
 
-                case "tab":
-                    input_handler.register_keypress(0, 0.1, InputKey.TAB)
-
-                case "1":
-                    input_handler.register_keypress(0, 0.1, InputKey.ONE)
-
-                case "2":
-                    input_handler.register_keypress(0, 0.1, InputKey.TWO)
-
-                case "3":
-                    input_handler.register_keypress(0, 0.1, InputKey.THREE)
-
-                case "click":
-                    mouse.click('left')
-
+                case "enter":
+                    input_handler.register_keypress(0, 0.2, InputKey.ENTER)
+                    
                 case "stop":
                     input_handler.stop_all()
