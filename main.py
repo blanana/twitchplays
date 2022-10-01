@@ -8,15 +8,7 @@ import pydirectinput
 
 from input_handler import InputHandler, InputKey, EventKind
 
-global special_char
-global capital_char
-global command_cooldown
 global stop
-
-command_cooldown = []
-special_char = ['!', '@', "#", "$", "%", "^", "&", "*", "(", ")", "?", ]
-capital_char = ['A', "B", 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-                'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 message = ' '
 user = ' '
@@ -108,7 +100,9 @@ def twitch():
                 print(user.title() + " : " + message)
                 process_input(message)
 
-def fuckingstop():
+# -----------------------------------------------------------------------------------------------------------------------
+
+def pleasestop():
     global stop
     if stop == 0:
         stop = 1
@@ -122,15 +116,15 @@ def fuckingstop():
         time.sleep(0.5)
         return
 
-def idontknow():
+def hotkey():
     while True:
         if keyboard.is_pressed('l'):
-            fuckingstop()
+            pleasestop()
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 t1 = threading.Thread(target=twitch)
-t2 = threading.Thread(target=idontknow)
+t2 = threading.Thread(target=hotkey)
 
 t1.start()
 t2.start()
