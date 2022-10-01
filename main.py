@@ -1,16 +1,13 @@
 import time
 import mouse
 import socket
+import random
 import userinfo
 import keyboard
 import threading
 import pydirectinput
 
-global special_char
-global capital_char
-global command_cooldown
 global message
-
 
 global direction
 global stop
@@ -34,11 +31,6 @@ global cam4b
 global cam5
 global cam6
 global cam7
-
-command_cooldown = []
-special_char = ['!', '@', "#", "$", "%", "^", "&", "*", "(", ")", "?", ]
-capital_char = ['A', "B", 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-                'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 message = ' '
 user = ' '
@@ -161,6 +153,10 @@ def camera(cam, x, y):
 
     if cam == 0:
         return
+
+def ActionChance(x,y):
+    chance = random.randint(x,y)
+    return chance
 
 # ---------------------------------------------------------------------------
 
@@ -373,7 +369,7 @@ def process_input(message):
 
 # ---------------------------------------------------------------------------
 
-    if user.lower() == 'blanana_m' or 'astralspiff': # user specific commands
+    if user.lower() == 'blanana_m' or 'astralspiff':
         match message:
 
         # toggle individual cameras
@@ -502,87 +498,92 @@ def process_input(message):
 
             # Left door
                 case "ldoor":
-                    if Ldoor == 1:
-                        if cams == 0:
-                            direction = 1
-                            pydirectinput.moveTo(55, 355)
-                            time.sleep(0.44)
-                            mouse.click('left')
-                            pydirectinput.moveTo(3, 455)
-                        if cams == 1:
-                            return
+                    if ActionChance(1,4) == 4:
+                        if Ldoor == 1:
+                            if cams == 0:
+                                direction = 1
+                                pydirectinput.moveTo(55, 355)
+                                time.sleep(0.44)
+                                mouse.click('left')
+                                pydirectinput.moveTo(3, 455)
+                            if cams == 1:
+                                return
 
-                    if Ldoor == 0:
-                        return
+                        if Ldoor == 0:
+                            return
 
             # Right door
                 case "rdoor":
-                    if Rdoor == 1:
-                        if cams == 0:
-                            direction = 2
-                            pydirectinput.moveTo(1210, 350)
-                            time.sleep(0.44)
-                            mouse.click('left')
-                            pydirectinput.moveTo(1278, 455)
-                        if cams == 1:
+                    if ActionChance(1,4) == 4:
+                        if Rdoor == 1:
+                            if cams == 0:
+                                direction = 2
+                                pydirectinput.moveTo(1210, 350)
+                                time.sleep(0.44)
+                                mouse.click('left')
+                                pydirectinput.moveTo(1278, 455)
+                            if cams == 1:
+                                return
+                        
+                        if Rdoor == 0:
                             return
-                    
-                    if Rdoor == 0:
-                        return
 
 # ---------------------------------------------------------------------------
 
             # Left light
                 case "llight":
-                    if Llight == 1:
-                        if cams == 0:
-                            direction = 1
-                            pydirectinput.moveTo(55, 455)
-                            time.sleep(0.44)
-                            mouse.click('left')
-                            pydirectinput.moveTo(3, 455)
-                        if cams == 1:
-                            return
+                    if ActionChance(1,4) == 4:
+                        if Llight == 1:
+                            if cams == 0:
+                                direction = 1
+                                pydirectinput.moveTo(55, 455)
+                                time.sleep(0.44)
+                                mouse.click('left')
+                                pydirectinput.moveTo(3, 455)
+                            if cams == 1:
+                                return
 
-                    if Llight == 0:
-                        return
+                        if Llight == 0:
+                            return
 
             # Right light
                 case "rlight":
-                    if Rlight == 1:
-                        if cams == 0:
-                            direction = 2
-                            pydirectinput.moveTo(1210, 470)
-                            time.sleep(0.44)
-                            mouse.click('left')
-                            pydirectinput.moveTo(1278, 455)
-                        if cams == 1:
+                    if ActionChance(1,4) == 4:
+                        if Rlight == 1:
+                            if cams == 0:
+                                direction = 2
+                                pydirectinput.moveTo(1210, 470)
+                                time.sleep(0.44)
+                                mouse.click('left')
+                                pydirectinput.moveTo(1278, 455)
+                            if cams == 1:
+                                return
+                        
+                        if Rlight == 0:
                             return
-                    
-                    if Rlight == 0:
-                        return
 
 # ---------------------------------------------------------------------------
 
             # general camera
                 case "cams":
-                    if cameras == 1:
-                        if cams == 0:
-                            cams = 1
-                            pydirectinput.moveTo(562, 667)
-                            time.sleep(0.1)
-                            pydirectinput.moveTo(455, 455)
-                            return
+                    if ActionChance(1,4) == 4:
+                        if cameras == 1:
+                            if cams == 0:
+                                cams = 1
+                                pydirectinput.moveTo(562, 667)
+                                time.sleep(0.1)
+                                pydirectinput.moveTo(455, 455)
+                                return
 
-                        if cams == 1:
-                            cams = 0
-                            pydirectinput.moveTo(562, 667)
-                            time.sleep(0.1)
-                            pydirectinput.moveTo(455, 455)
-                            return
+                            if cams == 1:
+                                cams = 0
+                                pydirectinput.moveTo(562, 667)
+                                time.sleep(0.1)
+                                pydirectinput.moveTo(455, 455)
+                                return
 
-                    if cameras == 0:
-                        return
+                        if cameras == 0:
+                            return
 
             # different cams
                 case "start":
@@ -633,19 +634,20 @@ def process_input(message):
 
             # boop Freddy's nose - "the most important control"
                 case "boop":
-                    if boop == 1:
-                            if direction == 1:
-                                if cams == 0:
-                                    pydirectinput.moveTo(679, 236)
-                                    mouse.click('left')
-                                    print('boop!')
-                                    pydirectinput.moveTo(3, 455)
+                    if ActionChance(1,4) == 4:
+                        if boop == 1:
+                                if direction == 1:
+                                    if cams == 0:
+                                        pydirectinput.moveTo(679, 236)
+                                        mouse.click('left')
+                                        print('boop!')
+                                        pydirectinput.moveTo(3, 455)
 
-                                if cams == 1:
+                                    if cams == 1:
+                                        return
+
+                                if direction == 2:
                                     return
-
-                            if direction == 2:
-                                return
-                    
-                    if boop == 0:
-                        return
+                        
+                        if boop == 0:
+                            return
