@@ -5,6 +5,7 @@ import random
 import userinfo
 import keyboard
 import threading
+import pyautogui
 import pydirectinput
 
 global message
@@ -325,6 +326,8 @@ def hotkey():
             print("cam5:"  + str(cam5))
             print("cam6:"  + str(cam6))
             print("cam7:"  + str(cam7))
+            print("--------------------")
+            print(pyautogui.position())
             print("                    ")
             time.sleep(0.5)
 
@@ -570,16 +573,20 @@ def process_input(message):
                         if cameras == 1:
                             if cams == 0:
                                 cams = 1
-                                pydirectinput.moveTo(562, 667)
+                                pydirectinput.moveTo(550, 606)
                                 time.sleep(0.1)
-                                pydirectinput.moveTo(455, 455)
+                                pydirectinput.moveTo(562, 700)
+                                time.sleep(0.1)
+                                pydirectinput.moveTo(550, 606)
                                 return
 
                             if cams == 1:
                                 cams = 0
+                                pydirectinput.moveTo(550, 606)
+                                time.sleep(0.1)
                                 pydirectinput.moveTo(562, 667)
                                 time.sleep(0.1)
-                                pydirectinput.moveTo(455, 455)
+                                pydirectinput.moveTo(550, 606)
                                 return
 
                         if cameras == 0:
