@@ -1,6 +1,6 @@
 This is a twitch bot that executes commands on your computer.\
 Current features:\
-mouse control, keyboard control, specifying the holding time in the message\
+mouse control, keyboard control, specifying the holding time in the message
 
 The commands are toggled off at startup!\
 Press L to toggle the commands
