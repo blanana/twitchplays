@@ -7,32 +7,6 @@ import keyboard
 import threading
 import pydirectinput
 
-global message
-
-global direction
-global stop
-global cams
-global ran
-
-global Ldoor
-global Rdoor
-global Llight
-global Rlight
-global cameras
-global boop
-
-global cam1a
-global cam1b
-global cam1c
-global cam2a
-global cam2b
-global cam3
-global cam4a
-global cam4b
-global cam5
-global cam6
-global cam7
-
 message = ' '
 user = ' '
 
@@ -302,8 +276,6 @@ def hotkey():
 # game control
 
 def process_input(message):
-
-    global user
 
     global direction
     global cams
