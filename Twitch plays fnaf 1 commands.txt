@@ -42,6 +42,7 @@ t_cam2a
 t_cam2b
 t_cam3
 t_cam4a
+t_cam4b
 t_cma5
 t_cam6
 t_cam7 - toggles the camera commands individually 
