@@ -35,19 +35,21 @@ T - prints all variables
 7 - toggles 1/4 chance
 
 other chat commands (can only be used by certain people):
-s_cam1a
-s_cam1b
-s_cam1c
-s_cam2a
-s_cam2b
-s_cam3
-s_cam4a
-s_cma5
-s_cam6
-s_cam7 - toggles the camera's command
+t_cam1a
+t_cam1b
+t_cam1c
+t_cam2a
+t_cam2b
+t_cam3
+t_cam4a
+t_cma5
+t_cam6
+t_cam7 - toggles the camera commands individually 
 
-s_cam_all - toggles all cams at once
+e_cam_all -  enables all cams
+d_cam_all - disables all cams
 
 All commands are toggled off on startup
 Random Chance is toggled off on startup
 L toggles all commands without toggling the variables
+start on the right
