@@ -1,5 +1,5 @@
 This is a version of the twitch bot made to control FNaF 1\
-Features: Full game control, toggling individual commands through hotkeys or messages\
+Features: Full game control, toggling individual commands through hotkeys or messages
 
 commands have a 1 in 4 chance of beeing executed\
 can be toggled py pressing 7\
