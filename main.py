@@ -6,6 +6,7 @@ import userinfo
 import keyboard
 import threading
 import pydirectinput
+from tkinter import *
 
 message = ' '
 user = ' '
@@ -122,10 +123,11 @@ def twitch():
 # -----------------------------------------------------------------------------------------------------------------------
 # miscellaneous functions
 
-def camera(cam, x, y):
+def camera(cam, x, y, text):
     if cam == 1:
         pydirectinput.moveTo(x, y)
         mouse.click('left')
+        text_stuff(text)
 
 def ActionChance(x,y):
     global ran
@@ -153,6 +155,18 @@ def toggle(var, text, val, a, b):
         print(text + ' enabled')
         time.sleep(val)
         return a
+
+def display():
+    global text
+    root = Tk()
+    text = Text(root, height=8)
+    text.insert("1.0", "Soup")
+    text.pack()
+    root.mainloop()
+
+def text_stuff(the):
+    text.delete("0.0", "end")
+    text.insert("1.0", the)
 
 # -----------------------------------------------------------------------------------------------------------------------
 # hotkeys
@@ -183,9 +197,6 @@ def hotkey():
     global cam7
 
     while True:
-
-# ---------------------------------------------------------------------------
-# toggle hotkeys
 
     # Left door toggle
         if keyboard.is_pressed('1'):
@@ -243,7 +254,7 @@ def hotkey():
             print('reset')
             time.sleep(0.5)
 
-    # test
+    # testing
         if keyboard.is_pressed('t'):
             print("                    ")
             print("direction:" + str(direction))
@@ -300,8 +311,7 @@ def process_input(message):
     global cam6
     global cam7
 
-# ---------------------------------------------------------------------------
-
+# streamer commands
     if user.lower() == 'blanana_m' or 'astralspiff':
         match message.lower():
 
@@ -339,7 +349,6 @@ def process_input(message):
                 case "t_cam7":
                     cam7  = toggle(cam7, 'Camera 7', 0)
 
-
                 case "e_cam_all":
                     cam1a = 1
                     cam1b = 1
@@ -368,8 +377,7 @@ def process_input(message):
                     cam7  = 0
                     print('all cams enabled')
 
-# ---------------------------------------------------------------------------
-
+# viewer commands
     if stop == 0:
         match message.lower():
 
@@ -378,25 +386,28 @@ def process_input(message):
                     if ActionChance(1,4) == 4:
                         direction = 1
                         control(Ldoor, cams,      55, 355,     3, 455)
+                        text_stuff("Left door")
 
             # Right door
                 case "rdoor":
                     if ActionChance(1,4) == 4:
                         direction = 2
                         control(Rdoor, cams,      1210, 350,   1278, 455)
+                        text_stuff("Right door")
 
             # Left light
                 case "llight":
                     if ActionChance(1,4) == 4:
                         direction = 1
                         control(Llight, cams,     55, 455,     3, 455)
+                        text_stuff("Left Light")
 
             # Right light
                 case "rlight":
                     if ActionChance(1,4) == 4:
                         direction = 2
                         control(Rlight, cams,     1210, 470,   1278, 455)
-
+                        text_stuff("Right Light")
 
             # general camera
                 case "cams":
@@ -409,6 +420,7 @@ def process_input(message):
                                 pydirectinput.moveTo(562, 700)
                                 time.sleep(0.1)
                                 pydirectinput.moveTo(550, 606)
+                                text_stuff("Cameras")
                                 return
 
                             if cams == 1:
@@ -418,52 +430,53 @@ def process_input(message):
                                 pydirectinput.moveTo(562, 667)
                                 time.sleep(0.1)
                                 pydirectinput.moveTo(550, 606)
+                                text_stuff("Cameras")
                                 return
 
             # different cams
                 case "cam1a":
                     if cam1a == 1:
-                        camera(cams, 980,350)
+                        camera(cams, 980, 350, "Camera 1a")
 
                 case "cam1b":
                     if cam1b == 1:
-                        camera(cams, 980,400)
+                        camera(cams, 980, 400, "Camera 1b")
 
                 case "cam1c":
                     if cam1c == 1:
-                        camera(cams, 920,480)
+                        camera(cams, 920, 480, "Camera 1c")
 
                 case "cam2a":
                     if cam2a == 1:
-                        camera(cams, 980,600)
+                        camera(cams, 980, 600, "Camera 2a")
 
                 case "cam2b":
                     if cam2b == 1:
-                        camera(cams, 980,650)
+                        camera(cams, 980, 650, "Camera 2b")
 
                 case "cam3":
                     if cam3 == 1:
-                        camera(cams, 900,580)
+                        camera(cams, 900, 580, "Camera 3")
 
                 case "cam4a":
                     if cam4a == 1:
-                        camera(cams, 1080,600)
+                        camera(cams, 1080, 600, "Camera 4a")
 
                 case "cam4b":
                     if cam4b == 1:
-                        camera(cams, 1080,650)
+                        camera(cams, 1080, 650, "Camera 4b")
 
                 case "cam5":
                     if cam5 == 1:
-                        camera(cams, 850,430)
+                        camera(cams, 850, 430, "Camera 5")
 
                 case "cam6":
                     if cam6 == 1:
-                        camera(cams, 1200,570)
+                        camera(cams, 1200, 570, "Camera 6")
 
                 case "cam7":
                     if cam7 == 1:
-                        camera(cams, 1200,430)
+                        camera(cams, 1200, 430, "Camera 7")
 
             # boop Freddy's nose - "the most important control"
                 case "boop":
@@ -475,12 +488,15 @@ def process_input(message):
                                     mouse.click('left')
                                     print('boop!')
                                     pydirectinput.moveTo(3, 455)
+                                    text_stuff("Boop!")
 
 # -----------------------------------------------------------------------------------------------------------------------
 # threading
 
 t1 = threading.Thread(target=twitch)
 t2 = threading.Thread(target=hotkey)
+t3 = threading.Thread(target=display)
 
 t1.start()
 t2.start()
+t3.start()
