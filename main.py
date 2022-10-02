@@ -5,7 +5,6 @@ import random
 import userinfo
 import keyboard
 import threading
-import pyautogui
 import pydirectinput
 
 global message
@@ -13,6 +12,7 @@ global message
 global direction
 global stop
 global cams
+global ran
 
 global Ldoor
 global Rdoor
@@ -36,9 +36,10 @@ global cam7
 message = ' '
 user = ' '
 
-direction = 0
+direction = 2
 stop = 1
 cams = 0
+ran = 0
 
 Ldoor   = 0
 Rdoor   = 0
@@ -152,14 +153,23 @@ def camera(cam, x, y):
         pydirectinput.moveTo(x, y)
         mouse.click('left')
 
-    if cam == 0:
-        return
-
 def ActionChance(x,y):
-    chance = random.randint(x,y)
-    return chance
+    global ran
+    if ran == 1:
+        chance = random.randint(x,y)
+        return chance
+    else:
+        chance = 4
+        return chance
 
-# ---------------------------------------------------------------------------
+def control(com1, com2, a, b, x1, x2, y1, y2):
+    if com1 == 1:
+        if com2 == 0:
+            a = b
+            pydirectinput.moveTo(x1, y1)
+            time.sleep(0.44)
+            mouse.click('left')
+            pydirectinput.moveTo(x2, y2)
 
 def please_stop():
     global stop
@@ -182,6 +192,7 @@ def hotkey():
     global direction
     global stop
     global cams
+    global ran
 
     global Ldoor
     global Rdoor
@@ -206,6 +217,7 @@ def hotkey():
 
 # ---------------------------------------------------------------------------
 # toggle hotkeys
+
     # Left door toggle
         if keyboard.is_pressed('1'):
             if Ldoor == 1:
@@ -272,11 +284,21 @@ def hotkey():
                 print('Boop enabled (boop)')
                 time.sleep(0.2)
 
+    # Chance toggle
+        if keyboard.is_pressed('7'):
+            if ran == 1:
+                ran = 0
+                print('Chance disabled')
+                time.sleep(0.2)
+            else:
+                ran = 1
+                print('Chance enabled')
+                time.sleep(0.2)
 
     # command toggle
         if keyboard.is_pressed('l'):
             please_stop()
-# ---------------------------------------------------------------------------
+
     # reset
         if keyboard.is_pressed('r'):
             cams = 0
@@ -305,8 +327,9 @@ def hotkey():
         if keyboard.is_pressed('t'):
             print("                    ")
             print("direction:" + str(direction))
-            print("cams:" + str(cams))
-            print("stop:" + str(stop))
+            print("cams:"      + str(cams))
+            print("chance:"    + str(ran))
+            print("stop:"      + str(stop))
             print("--------------------")
             print("Ldoor:"   + str(Ldoor))
             print("Rdoor:"   + str(Rdoor))
@@ -326,19 +349,8 @@ def hotkey():
             print("cam5:"  + str(cam5))
             print("cam6:"  + str(cam6))
             print("cam7:"  + str(cam7))
-            print("--------------------")
-            print(pyautogui.position())
             print("                    ")
             time.sleep(0.5)
-
-# -----------------------------------------------------------------------------------------------------------------------
-# threading
-
-t1 = threading.Thread(target=twitch)
-t2 = threading.Thread(target=hotkey)
-
-t1.start()
-t2.start()
 
 # -----------------------------------------------------------------------------------------------------------------------
 # game control
@@ -502,70 +514,23 @@ def process_input(message):
             # Left door
                 case "ldoor":
                     if ActionChance(1,4) == 4:
-                        if Ldoor == 1:
-                            if cams == 0:
-                                direction = 1
-                                pydirectinput.moveTo(55, 355)
-                                time.sleep(0.44)
-                                mouse.click('left')
-                                pydirectinput.moveTo(3, 455)
-                            if cams == 1:
-                                return
-
-                        if Ldoor == 0:
-                            return
+                        control(Ldoor, cams, direction, 1,     55, 355, 3, 455)
 
             # Right door
                 case "rdoor":
                     if ActionChance(1,4) == 4:
-                        if Rdoor == 1:
-                            if cams == 0:
-                                direction = 2
-                                pydirectinput.moveTo(1210, 350)
-                                time.sleep(0.44)
-                                mouse.click('left')
-                                pydirectinput.moveTo(1278, 455)
-                            if cams == 1:
-                                return
-                        
-                        if Rdoor == 0:
-                            return
-
-# ---------------------------------------------------------------------------
+                        control(Rdoor, cams, direction, 2,     1210, 350, 1278, 455)
 
             # Left light
                 case "llight":
                     if ActionChance(1,4) == 4:
-                        if Llight == 1:
-                            if cams == 0:
-                                direction = 1
-                                pydirectinput.moveTo(55, 455)
-                                time.sleep(0.44)
-                                mouse.click('left')
-                                pydirectinput.moveTo(3, 455)
-                            if cams == 1:
-                                return
-
-                        if Llight == 0:
-                            return
+                        control(Llight, cams, direction, 1,    55, 455, 3, 455)
 
             # Right light
                 case "rlight":
                     if ActionChance(1,4) == 4:
-                        if Rlight == 1:
-                            if cams == 0:
-                                direction = 2
-                                pydirectinput.moveTo(1210, 470)
-                                time.sleep(0.44)
-                                mouse.click('left')
-                                pydirectinput.moveTo(1278, 455)
-                            if cams == 1:
-                                return
-                        
-                        if Rlight == 0:
-                            return
+                        control(Rlight, cams, direction, 2,    1210, 470, 1278, 455)
 
-# ---------------------------------------------------------------------------
 
             # general camera
                 case "cams":
@@ -588,9 +553,6 @@ def process_input(message):
                                 time.sleep(0.1)
                                 pydirectinput.moveTo(550, 606)
                                 return
-
-                        if cameras == 0:
-                            return
 
             # different cams
                 case "start":
@@ -637,24 +599,22 @@ def process_input(message):
                     if cam7 == 1:
                         camera(cams, 1200,430)
 
-# ---------------------------------------------------------------------------
-
             # boop Freddy's nose - "the most important control"
                 case "boop":
                     if ActionChance(1,4) == 4:
                         if boop == 1:
-                                if direction == 1:
-                                    if cams == 0:
-                                        pydirectinput.moveTo(679, 236)
-                                        mouse.click('left')
-                                        print('boop!')
-                                        pydirectinput.moveTo(3, 455)
+                            if direction == 1:
+                                if cams == 0:
+                                    pydirectinput.moveTo(679, 236)
+                                    mouse.click('left')
+                                    print('boop!')
+                                    pydirectinput.moveTo(3, 455)
 
-                                    if cams == 1:
-                                        return
+# -----------------------------------------------------------------------------------------------------------------------
+# threading
 
-                                if direction == 2:
-                                    return
-                        
-                        if boop == 0:
-                            return
+t1 = threading.Thread(target=twitch)
+t2 = threading.Thread(target=hotkey)
+
+t1.start()
+t2.start()
