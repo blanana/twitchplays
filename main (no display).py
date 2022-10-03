@@ -4,7 +4,7 @@ import random
 import userinfo
 import keyboard
 import threading
-from tkinter import *
+
 from input_handler import InputHandler, InputKey, EventKind
 
 message = ' '
@@ -110,18 +110,6 @@ def toggle(var, text, val, a, b):
         time.sleep(val)
         return a
 
-def display():
-    global text
-    root = Tk()
-    text = Text(root, height=8)
-    text.insert("1.0", "Soup")
-    text.pack()
-    root.mainloop()
-
-def text_stuff(the):
-    text.delete("0.0", "end")
-    text.insert("1.0", the)
-
 def ActionChance(x,y):
     global ran
     if ran == 1:
@@ -159,22 +147,18 @@ def process_input(message):
                     case "right":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.RIGHT)
-                            text_stuff("Right " + str(time_value) + " seconds")
 
                     case "left":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.LEFT)
-                            text_stuff("Left " + str(time_value) + " seconds")
 
                     case "up":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.UP)
-                            text_stuff("Up " + str(time_value) + " seconds")
 
                     case "down":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.DOWN)
-                            text_stuff("Down " + str(time_value) + " seconds")
 
 
     except (ValueError, IndexError):
@@ -183,51 +167,41 @@ def process_input(message):
                 case "jump":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.UP)
-                        text_stuff("Jump")
 
                 case "jump right":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.RIGHT)
                         input_handler.register_keypress(0.1, 0.1, InputKey.UP)
-                        text_stuff("Jump right")
 
                 case "jump left":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.LEFT)
                         input_handler.register_keypress(0.1, 0.1, InputKey.UP)
-                        text_stuff("Jump left")
 
                 case "use":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.3, InputKey.GRAB)
-                        text_stuff("Use")
 
                 case "hold":
                     if ActionChance(1,4) == 4:
                         input_handler.register_event(0, InputKey.GRAB, EventKind.PRESS)
-                        text_stuff("Hold")
 
                 case "release":
                     if ActionChance(1,4) == 4:
                         input_handler.register_event(0, InputKey.GRAB, EventKind.RELEASE)
-                        text_stuff("Release")
 
                 case "enter":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.ENTER)
-                        text_stuff("Enter")
                     
                 case "stop":
                     if ActionChance(1,4) == 4:
                         input_handler.stop_all()
-                        text_stuff("Stop")
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 t1 = threading.Thread(target=twitch)
 t2 = threading.Thread(target=hotkey)
-t3 = threading.Thread(target=display)
 
 t1.start()
 t2.start()
-t3.start()
