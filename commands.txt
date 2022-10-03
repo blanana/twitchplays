@@ -13,3 +13,9 @@ use     - press control for 1 second
 hold    - hold control
 release - release control
 enter   - press enter for 0,1 seconds
+
+--------------------------
+hotkeys:
+L - toggles all Commands
+7 - toggles command Chance
+both are off on startup
