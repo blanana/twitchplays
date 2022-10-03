@@ -3,7 +3,8 @@ Current features:\
 mouse control, keyboard control, specifying the holding time in the message, display with last used command, toggleable Chance
 
 The commands are toggled off at startup!\
-Press L to toggle the commands
+Press L to toggle the commands\
+Press 7 to toggle Chance
   
 start the bot:
 - make sure the libraries are installed
