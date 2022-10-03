@@ -120,9 +120,9 @@ def display():
     text.pack()
     root.mainloop()
 
-def text_stuff(the):
+def text_stuff(the, other):
     text.delete("0.0", "end")
-    text.insert("1.0", the)
+    text.insert("1.0", the + ": " + other)
 
 def ActionChance(x,y):
     global ran
@@ -163,28 +163,28 @@ def process_input(message):
                     case "w":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.W)
-                            text_stuff("W " + str(time_value) + " seconds")
+                            text_stuff(user, "W " + str(time_value) + " seconds")
 
                     case "a":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.A)
-                            text_stuff("A " + str(time_value) + " seconds")
+                            text_stuff(user, "A " + str(time_value) + " seconds")
 
                     case "s":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.S)
-                            text_stuff("S " + str(time_value) + " seconds")
+                            text_stuff(user, "S " + str(time_value) + " seconds")
 
                     case "d":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.D)
-                            text_stuff("D " + str(time_value) + " seconds")
+                            text_stuff(user, "D " + str(time_value) + " seconds")
 
                     case "run":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.SHIFT)
                             input_handler.register_keypress(0, time_value, InputKey.W)
-                            text_stuff("Run " + str(time_value) + " seconds")
+                            text_stuff(user, "Run " + str(time_value) + " seconds")
 
 
             if time_value < 361 and time_value > 0:
@@ -193,22 +193,22 @@ def process_input(message):
                     case "right":
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(pixels, None)
-                            text_stuff("right " + str(time_value) + "°")
+                            text_stuff(user, "right " + str(time_value) + "°")
 
                     case "left":
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(-pixels, None)
-                            text_stuff("left " + str(time_value) + "°")
+                            text_stuff(user, "left " + str(time_value) + "°")
 
                     case "up":
                         if ActionChance(1,4) == 4:   
                             pydirectinput.move(None, -pixels)
-                            text_stuff("up " + str(time_value) + "°")
+                            text_stuff(user, "up " + str(time_value) + "°")
 
                     case "down":
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(None, pixels)
-                            text_stuff("down " + str(time_value) + "°")
+                            text_stuff(user, "down " + str(time_value) + "°")
                             
 
         except (ValueError, IndexError):
@@ -216,59 +216,59 @@ def process_input(message):
                 case "jump":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.SPACE)
-                        text_stuff("Jump")
+                        text_stuff(user, "Jump")
 
                 case "jump w":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.7, InputKey.W)
                         input_handler.register_keypress(0.1, 0.2, InputKey.SPACE)
-                        text_stuff("Jump forward")
+                        text_stuff(user, "Jump forward")
 
                 case "use":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 5, InputKey.E)
-                        text_stuff("Use")
+                        text_stuff(user, "Use")
 
                 case "call":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.Q)
-                        text_stuff("Call")
+                        text_stuff(user, "Call")
 
                 case "sneak":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.CTRL)
                         input_handler.register_keypress(5.1, 0.1, InputKey.CTRL)
-                        text_stuff("Sneak")
+                        text_stuff(user, "Sneak")
 
                 case "tab":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.TAB)
-                        text_stuff("Tab")
+                        text_stuff(user, "Tab")
 
                 case "1":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.ONE)
-                        text_stuff("1")
+                        text_stuff(user, "1")
 
                 case "2":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.TWO)
-                        text_stuff("2")
+                        text_stuff(user, "2")
 
                 case "3":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.THREE)
-                        text_stuff("3")
+                        text_stuff(user, "3")
 
                 case "click":
                     if ActionChance(1,4) == 4:
                         mouse.click('left')
-                        text_stuff("Click")
+                        text_stuff(user, "Click")
 
                 case "stop":
                     if ActionChance(1,4) == 4:
                         input_handler.stop_all()
-                        text_stuff("Stop")
+                        text_stuff(user, "Stop")
 
 # -----------------------------------------------------------------------------------------------------------------------
 
