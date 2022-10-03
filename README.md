@@ -9,7 +9,7 @@ Press 7 to toggle Chance
 start the bot:
 - make sure the libraries are installed
 - add your user info to userinfo.py
-- run main.py
+- run main.py or main (no display).py
   
 add new keys:
 - add the key definition to input_handler.py
