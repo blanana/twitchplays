@@ -6,7 +6,7 @@ import userinfo
 import keyboard
 import threading
 import pydirectinput
-from tkinter import *
+
 from input_handler import InputHandler, InputKey, EventKind
 
 message = ' '
@@ -112,18 +112,6 @@ def toggle(var, text, val, a, b):
         time.sleep(val)
         return a
 
-def display():
-    global text
-    root = Tk()
-    text = Text(root, height=8)
-    text.insert("1.0", "Soup")
-    text.pack()
-    root.mainloop()
-
-def text_stuff(the):
-    text.delete("0.0", "end")
-    text.insert("1.0", the)
-
 def ActionChance(x,y):
     global ran
     if ran == 1:
@@ -163,28 +151,23 @@ def process_input(message):
                     case "w":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.W)
-                            text_stuff("W " + str(time_value) + " seconds")
 
                     case "a":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.A)
-                            text_stuff("A " + str(time_value) + " seconds")
 
                     case "s":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.S)
-                            text_stuff("S " + str(time_value) + " seconds")
 
                     case "d":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.D)
-                            text_stuff("D " + str(time_value) + " seconds")
 
                     case "run":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.SHIFT)
                             input_handler.register_keypress(0, time_value, InputKey.W)
-                            text_stuff("Run " + str(time_value) + " seconds")
 
 
             if time_value < 361 and time_value > 0:
@@ -193,89 +176,72 @@ def process_input(message):
                     case "right":
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(pixels, None)
-                            text_stuff("right " + str(time_value) + "°")
 
                     case "left":
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(-pixels, None)
-                            text_stuff("left " + str(time_value) + "°")
 
                     case "up":
                         if ActionChance(1,4) == 4:   
                             pydirectinput.move(None, -pixels)
-                            text_stuff("up " + str(time_value) + "°")
 
                     case "down":
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(None, pixels)
-                            text_stuff("down " + str(time_value) + "°")
-                            
+
 
         except (ValueError, IndexError):
             match message.lower():
                 case "jump":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.SPACE)
-                        text_stuff("Jump")
 
                 case "jump w":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.7, InputKey.W)
                         input_handler.register_keypress(0.1, 0.2, InputKey.SPACE)
-                        text_stuff("Jump forward")
 
                 case "use":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 5, InputKey.E)
-                        text_stuff("Use")
 
                 case "call":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.Q)
-                        text_stuff("Call")
 
                 case "sneak":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.CTRL)
                         input_handler.register_keypress(5.1, 0.1, InputKey.CTRL)
-                        text_stuff("Sneak")
 
                 case "tab":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.TAB)
-                        text_stuff("Tab")
 
                 case "1":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.ONE)
-                        text_stuff("1")
 
                 case "2":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.TWO)
-                        text_stuff("2")
 
                 case "3":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.THREE)
-                        text_stuff("3")
 
                 case "click":
                     if ActionChance(1,4) == 4:
                         mouse.click('left')
-                        text_stuff("Click")
 
                 case "stop":
                     if ActionChance(1,4) == 4:
                         input_handler.stop_all()
-                        text_stuff("Stop")
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 t1 = threading.Thread(target=twitch)
 t2 = threading.Thread(target=hotkey)
-t3 = threading.Thread(target=display)
 
 t1.start()
 t2.start()
-t3.start()
