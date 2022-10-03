@@ -118,9 +118,9 @@ def display():
     text.pack()
     root.mainloop()
 
-def text_stuff(the):
+def text_stuff(the, other):
     text.delete("0.0", "end")
-    text.insert("1.0", the)
+    text.insert("1.0", the + ": " + other)
 
 def ActionChance(x,y):
     global ran
@@ -159,22 +159,22 @@ def process_input(message):
                     case "right":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.RIGHT)
-                            text_stuff("Right " + str(time_value) + " seconds")
+                            text_stuff(user, "Right " + str(time_value) + " seconds")
 
                     case "left":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.LEFT)
-                            text_stuff("Left " + str(time_value) + " seconds")
+                            text_stuff(user, "Left " + str(time_value) + " seconds")
 
                     case "up":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.UP)
-                            text_stuff("Up " + str(time_value) + " seconds")
+                            text_stuff(user, "Up " + str(time_value) + " seconds")
 
                     case "down":
                         if ActionChance(1,4) == 4:
                             input_handler.register_keypress(0, time_value, InputKey.DOWN)
-                            text_stuff("Down " + str(time_value) + " seconds")
+                            text_stuff(user, "Down " + str(time_value) + " seconds")
 
 
     except (ValueError, IndexError):
@@ -183,44 +183,44 @@ def process_input(message):
                 case "jump":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.1, InputKey.UP)
-                        text_stuff("Jump")
+                        text_stuff(user, "Jump")
 
                 case "jump right":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.RIGHT)
                         input_handler.register_keypress(0.1, 0.1, InputKey.UP)
-                        text_stuff("Jump right")
+                        text_stuff(user, "Jump right")
 
                 case "jump left":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.LEFT)
                         input_handler.register_keypress(0.1, 0.1, InputKey.UP)
-                        text_stuff("Jump left")
+                        text_stuff(user, "Jump left")
 
                 case "use":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.3, InputKey.GRAB)
-                        text_stuff("Use")
+                        text_stuff(user, "Use")
 
                 case "hold":
                     if ActionChance(1,4) == 4:
                         input_handler.register_event(0, InputKey.GRAB, EventKind.PRESS)
-                        text_stuff("Hold")
+                        text_stuff(user, "Hold")
 
                 case "release":
                     if ActionChance(1,4) == 4:
                         input_handler.register_event(0, InputKey.GRAB, EventKind.RELEASE)
-                        text_stuff("Release")
+                        text_stuff(user, "Release")
 
                 case "enter":
                     if ActionChance(1,4) == 4:
                         input_handler.register_keypress(0, 0.2, InputKey.ENTER)
-                        text_stuff("Enter")
+                        text_stuff(user, "Enter")
                     
                 case "stop":
                     if ActionChance(1,4) == 4:
                         input_handler.stop_all()
-                        text_stuff("Stop")
+                        text_stuff(user, "Stop")
 
 # -----------------------------------------------------------------------------------------------------------------------
 
