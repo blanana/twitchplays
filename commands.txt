@@ -27,4 +27,10 @@ click - clicks left mouse button
 2 - presses 2 for 0.1 seconds
 3 - presses 3 for 0.1 seconds
 
+----------------------------------------------
+hotkeys:
+L - toggles Commands
+7 - toggles command Chance (normally 1/4)
+both are off on startup
+
 *also works with float vaues
