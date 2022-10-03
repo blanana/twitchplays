@@ -1,6 +1,6 @@
 This is a twitch bot that executes commands on your computer.\
 Current features:\
-mouse control, keyboard control, specifying the holding time in the message
+mouse control, keyboard control, specifying the holding time in the message, display with last used command, toggleable Chance
 
 The commands are toggled off at startup!\
 Press L to toggle the commands
@@ -27,3 +27,6 @@ without time_value:
   
 add new commands to stop:
 - add the definition to input_handler.py
+
+adjust the Chance:
+- change the second value where the AnctionChance() function gets called in main.py
