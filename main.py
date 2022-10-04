@@ -116,6 +116,9 @@ def display():
     global text
     root = Tk()
     text = Text(root, height=8)
+    text['background']='#1e1e1e'
+    text.configure(fg='white')
+    text.configure(font='Calibri')
     text.insert("1.0", "Soup")
     text.pack()
     root.mainloop()
