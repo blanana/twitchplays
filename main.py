@@ -127,7 +127,7 @@ def camera(cam, x, y, text):
     if cam == 1:
         pydirectinput.moveTo(x, y)
         mouse.click('left')
-        text_stuff(text)
+        text_stuff(user + text)
 
 def ActionChance(x,y):
     global ran
@@ -160,6 +160,9 @@ def display():
     global text
     root = Tk()
     text = Text(root, height=8)
+    text['background']='#1e1e1e'
+    text.configure(fg='white')
+    text.configure(font='Calibri')
     text.insert("1.0", "Soup")
     text.pack()
     root.mainloop()
@@ -437,57 +440,46 @@ def process_input(message):
                 case "cam1a":
                     if cam1a == 1:
                         camera(cams, 980, 350, "Camera 1a")
-                        text_stuff(user, "Camera 1a")
 
                 case "cam1b":
                     if cam1b == 1:
                         camera(cams, 980, 400, "Camera 1b")
-                        (user, "Camera 1b")
 
                 case "cam1c":
                     if cam1c == 1:
                         camera(cams, 920, 480, "Camera 1c")
-                        (user, "Camera 1c")
 
                 case "cam2a":
                     if cam2a == 1:
                         camera(cams, 980, 600, "Camera 2a")
-                        (user, "Camera 2a")
 
                 case "cam2b":
                     if cam2b == 1:
                         camera(cams, 980, 650, "Camera 2b")
-                        (user, "Camera 2b")
 
                 case "cam3":
                     if cam3 == 1:
                         camera(cams, 900, 580, "Camera 3")
-                        (user, "Camera 3")
 
                 case "cam4a":
                     if cam4a == 1:
                         camera(cams, 1080, 600, "Camera 4a")
-                        (user, "Camera 4a")
 
                 case "cam4b":
                     if cam4b == 1:
                         camera(cams, 1080, 650, "Camera 4b")
-                        (user, "Camera 4b")
 
                 case "cam5":
                     if cam5 == 1:
                         camera(cams, 850, 430, "Camera 5")
-                        (user, "Camera 5")
 
                 case "cam6":
                     if cam6 == 1:
                         camera(cams, 1200, 570, "Camera 6")
-                        (user, "Camera 6")
 
                 case "cam7":
                     if cam7 == 1:
                         camera(cams, 1200, 430, "Camera 7")
-                        (user, "Camera 7")
 
             # boop Freddy's nose - "the most important control"
                 case "boop":
