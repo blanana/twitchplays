@@ -166,8 +166,8 @@ def process_input(message):
 
                     case "run":
                         if ActionChance(1,4) == 4:
-                            input_handler.register_keypress(0, time_value, InputKey.SHIFT)
                             input_handler.register_keypress(0, time_value, InputKey.W)
+                            input_handler.register_keypress(0, time_value, InputKey.SHIFT)
 
 
             if time_value < 361 and time_value > 0:
