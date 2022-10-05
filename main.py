@@ -190,7 +190,7 @@ def process_input(message):
                             text_stuff(user, "Run " + str(time_value) + " seconds")
 
 
-            if time_value < 361 and time_value > 0:
+            if time_value <= 360 and time_value > 0:
                 pixels = int(time_value*(1520/360))
                 match command:
                     case "right":
