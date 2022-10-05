@@ -161,7 +161,7 @@ def process_input(message):
             command = message_parts[0].lower()
             time_value = float(message_parts[1])
 
-            if time_value < 11 and time_value > 0:
+            if time_value <= 10 and time_value > 0:
                 match command:
                     case "w":
                         if ActionChance(1,4) == 4:
