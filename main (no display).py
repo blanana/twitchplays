@@ -170,7 +170,7 @@ def process_input(message):
                             input_handler.register_keypress(0, time_value, InputKey.SHIFT)
 
 
-            if time_value < 361 and time_value > 0:
+            if time_value <= 360 and time_value > 0:
                 pixels = int(time_value*(1520/360))
                 match command:
                     case "right":
