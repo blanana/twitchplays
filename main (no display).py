@@ -11,6 +11,7 @@ message = ' '
 user = ' '
 stop = 1
 ran = 0
+limit = 25
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -135,13 +136,21 @@ def hotkey():
 
 def process_input(message):
 
+    global limit
     message_parts = message.split(" ")
 
     try:
         command = message_parts[0].lower()
         time_value = float(message_parts[1])
 
-        if time_value < 26 and time_value > 0:
+        if user.lower() == 'blanana_m' or 'astralspiff':
+            match command:
+                case "set_limit":
+                    limit = time_value
+                    print('limit = ' + str(limit))
+
+
+        if time_value <= limit  and time_value > 0:
             if stop == 0:
                 match command:
                     case "right":
