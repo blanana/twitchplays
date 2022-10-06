@@ -27,6 +27,8 @@ click - clicks left mouse button
 2 - presses 2 for 0.1 seconds
 3 - presses 3 for 0.1 seconds
 
+set_limit <number>* changes the time limit for w, a, s, d and run
+
 ----------------------------------------------
 hotkeys:
 L - toggles Commands
