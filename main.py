@@ -13,6 +13,7 @@ message = ' '
 user = ' '
 stop = 1
 ran = 0
+limit = 5
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -145,6 +146,7 @@ def hotkey():
     while True:
         if keyboard.is_pressed('l'):
             stop = toggle(stop, "Commands", 0.2, 0, 1)
+            input_handler.stop_all()
 
         if keyboard.is_pressed('7'):
             ran = toggle(ran, "Chance", 0.2, 1, 0)
@@ -154,14 +156,22 @@ def hotkey():
 def process_input(message):
 
     global ran
+    global limit
     message_parts = message.split(" ")
 
-    if stop == 0:
-        try:
-            command = message_parts[0].lower()
-            time_value = float(message_parts[1])
+    try:
+        command = message_parts[0].lower()
+        time_value = float(message_parts[1])
 
-            if time_value <= 10 and time_value > 0:
+        if user.lower() == 'blanana_m' or 'astralspiff':
+            match command:
+                case "set_limit":
+                    limit = time_value
+                    print('limit = ' + str(limit))
+
+
+        if time_value <= limit and time_value > 0:
+            if stop == 0:
                 match command:
                     case "w":
                         if ActionChance(1,4) == 4:
@@ -190,7 +200,8 @@ def process_input(message):
                             text_stuff(user, "Run " + str(time_value) + " seconds")
 
 
-            if time_value <= 360 and time_value > 0:
+        if time_value < 361 and time_value > 0:
+            if stop == 0:
                 pixels = int(time_value*(1520/360))
                 match command:
                     case "right":
@@ -212,9 +223,10 @@ def process_input(message):
                         if ActionChance(1,4) == 4:
                             pydirectinput.move(None, pixels)
                             text_stuff(user, "down " + str(time_value) + "°")
-                            
 
-        except (ValueError, IndexError):
+
+    except (ValueError, IndexError):
+        if stop == 0:
             match message.lower():
                 case "jump":
                     if ActionChance(1,4) == 4:
