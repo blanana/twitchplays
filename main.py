@@ -6,14 +6,14 @@ import userinfo
 import keyboard
 import threading
 import pydirectinput
-from input_handler import InputHandler, InputKey, EventKind
+from input_handler import InputHandler, InputKey
 
 message = ' '
 user = ' '
 stop = 1
 ran = 0
 
-pydirectinput.FAILSAVE = False
+pydirectinput.FAILSAFE = False
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -137,11 +137,20 @@ def hotkey():
         if keyboard.is_pressed('7'):
             ran = toggle(ran, "Chance", 0.2, 1, 0)
 
-        if keyboard.is_pressed('t'):
+
+
+        if keyboard.is_pressed('1'):
             message = "w 5"
             user = "Spammer"
             print(user.title() + " : " + message)
             process_input(message)
+
+        if keyboard.is_pressed('2'):
+            message = "up 90"
+            user = "Spammer"
+            print(user.title() + " : " + message)
+            process_input(message)
+
             
 # -----------------------------------------------------------------------------------------------------------------------
 # process input

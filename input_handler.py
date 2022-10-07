@@ -1,8 +1,7 @@
-from enum import Enum, auto
-
 import time
-import threading
 import keyboard
+import threading
+from enum import Enum, auto
 
 class InputKey(Enum):
     W     = auto()
@@ -65,7 +64,7 @@ class InputHandler:
         self.events.append(event)
 
     def register_keypress(self, start_offset: float, duration: float, key: InputKey):
-        if len(self.events) <= 10:
+        if len(self.events) < 10:
             self.register_event(start_offset, key, EventKind.PRESS)
             self.register_event(start_offset + duration, key, EventKind.RELEASE)
         else:
