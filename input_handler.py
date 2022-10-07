@@ -65,8 +65,11 @@ class InputHandler:
         self.events.append(event)
 
     def register_keypress(self, start_offset: float, duration: float, key: InputKey):
-        self.register_event(start_offset, key, EventKind.PRESS)
-        self.register_event(start_offset + duration, key, EventKind.RELEASE)
+        if len(self.events) <= 10:
+            self.register_event(start_offset, key, EventKind.PRESS)
+            self.register_event(start_offset + duration, key, EventKind.RELEASE)
+        else:
+            return
 
     def stop_all(self):
         self.events.clear()
