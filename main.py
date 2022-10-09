@@ -136,21 +136,6 @@ def hotkey():
 
         if keyboard.is_pressed('7'):
             ran = toggle(ran, "Chance", 0.2, 1, 0)
-
-
-
-        if keyboard.is_pressed('1'):
-            message = "w 5"
-            user = "Spammer"
-            print(user.title() + " : " + message)
-            process_input(message)
-
-        if keyboard.is_pressed('2'):
-            message = "up 90"
-            user = "Spammer"
-            print(user.title() + " : " + message)
-            process_input(message)
-
             
 # -----------------------------------------------------------------------------------------------------------------------
 # process input

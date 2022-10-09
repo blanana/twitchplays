@@ -91,9 +91,7 @@ class InputHandler:
                         self.press(event.key)
                     elif event.event_kind is EventKind.RELEASE:
                         self.release(event.key)
-
                     self.events.pop(index)
-
             time.sleep(0.01)
 
     def press(self, key: InputKey):

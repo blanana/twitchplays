@@ -1,11 +1,9 @@
-w <number between 0 and 10>* - holds w for x seconds
-a <number between 0 and 10>* - holds a for x seconds
-s <number between 0 and 10>* - holds s for x seconds
-d <number between 0 and 10>* - holds d for x seconds
+w <float between 0 and 5>* - holds w for x seconds
+a <float between 0 and 5>* - holds a for x seconds
+s <float between 0 and 5>* - holds s for x seconds
+d <float between 0 and 5>* - holds d for x seconds
 
-stop - releases w, a, s, d
-
-run <number between 0 and 10>* - sprints forward for x seconds
+run <float between 0 and 10> - sprints forward for x seconds
 
 jump   - jumps
 jump w - jumps forward
@@ -16,7 +14,7 @@ right <number between 0 and 360> - moves mouse right by x degrees
 left  <number between 0 and 360> - moves mouse left by x degrees
 up    <number between 0 and 360> - moves mouse up by x degrees
 down  <number between 0 and 360> - moves mouse down by x degrees
- 
+
 
 use   - holds e for 5 seconds
 tab   - presses tab for 0.1 seconds
@@ -27,12 +25,8 @@ click - clicks left mouse button
 2 - presses 2 for 0.1 seconds
 3 - presses 3 for 0.1 seconds
 
-set_limit <number>* changes the time limit for w, a, s, d and run
-
 ----------------------------------------------
 hotkeys:
 L - toggles Commands
 7 - toggles command Chance (normally 1/4)
 both are off on startup
-
-*also works with float vaues
