@@ -1,5 +1,5 @@
 right x - hold right for x seconds |
-left x  - hold left for x seconds  | 1-25 seconds
+left x  - hold left for x seconds  | 1-10 seconds
 up x    - hold up for x seconds    | (float vaues work too)
 down x  - hold down for x seconds  |
 
@@ -13,9 +13,6 @@ use     - press control for 1 second
 hold    - hold control
 release - release control
 enter   - press enter for 0,1 seconds
-
-set_limit <number> - changes time limit for right, left, up, down
-
 --------------------------
 hotkeys:
 L - toggles all Commands
