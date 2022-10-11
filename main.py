@@ -6,7 +6,6 @@ import userinfo
 import keyboard
 import threading
 import pydirectinput
-from tkinter import *
 
 message = ' '
 user = ' '
@@ -34,6 +33,8 @@ cam4b = 0
 cam5  = 0
 cam6  = 0
 cam7  = 0
+
+pydirectinput.FAILSAFE = False
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -123,11 +124,10 @@ def twitch():
 # -----------------------------------------------------------------------------------------------------------------------
 # miscellaneous functions
 
-def camera(cam, x, y, text):
+def camera(cam, x, y):
     if cam == 1:
         pydirectinput.moveTo(x, y)
         mouse.click('left')
-        text_stuff(user, text)
 
 def ActionChance(x,y):
     global ran
@@ -155,21 +155,6 @@ def toggle(var, text, val, a, b):
         print(text + ' enabled')
         time.sleep(val)
         return a
-
-def display():
-    global text
-    root = Tk()
-    text = Text(root, height=8)
-    text['background']='#1e1e1e'
-    text.configure(fg='white')
-    text.configure(font='Calibri')
-    text.insert("1.0", "Soup")
-    text.pack()
-    root.mainloop()
-
-def text_stuff(the, other):
-    text.delete("0.0", "end")
-    text.insert("1.0", the + ": " + other)
 
 # -----------------------------------------------------------------------------------------------------------------------
 # hotkeys
@@ -200,6 +185,9 @@ def hotkey():
     global cam7
 
     while True:
+
+# ---------------------------------------------------------------------------
+# toggle hotkeys
 
     # Left door toggle
         if keyboard.is_pressed('1'):
@@ -257,7 +245,7 @@ def hotkey():
             print('reset')
             time.sleep(0.5)
 
-    # testing
+    # test
         if keyboard.is_pressed('t'):
             print("                    ")
             print("direction:" + str(direction))
@@ -291,6 +279,8 @@ def hotkey():
 
 def process_input(message):
 
+    global user
+
     global direction
     global cams
     global stop
@@ -314,7 +304,8 @@ def process_input(message):
     global cam6
     global cam7
 
-# streamer commands
+# ---------------------------------------------------------------------------
+
     if user.lower() == 'blanana_m' or 'astralspiff':
         match message.lower():
 
@@ -380,7 +371,8 @@ def process_input(message):
                     cam7  = 0
                     print('all cams enabled')
 
-# viewer commands
+# ---------------------------------------------------------------------------
+
     if stop == 0:
         match message.lower():
 
@@ -389,28 +381,24 @@ def process_input(message):
                     if ActionChance(1,4) == 4:
                         direction = 1
                         control(Ldoor, cams,      55, 355,     3, 455)
-                        text_stuff(user ,"Left door")
 
             # Right door
                 case "rdoor":
                     if ActionChance(1,4) == 4:
                         direction = 2
                         control(Rdoor, cams,      1210, 350,   1278, 455)
-                        text_stuff(user, "Right door")
 
             # Left light
                 case "llight":
                     if ActionChance(1,4) == 4:
                         direction = 1
                         control(Llight, cams,     55, 455,     3, 455)
-                        text_stuff(user, "Left Light")
 
             # Right light
                 case "rlight":
                     if ActionChance(1,4) == 4:
                         direction = 2
                         control(Rlight, cams,     1210, 470,   1278, 455)
-                        text_stuff(user, "Right Light")
 
             # general camera
                 case "cams":
@@ -421,7 +409,6 @@ def process_input(message):
                                 pydirectinput.moveTo(550, 606)
                                 pydirectinput.moveTo(562, 700)
                                 pydirectinput.moveTo(550, 606)
-                                text_stuff(user, "Cameras")
                                 return
 
                             if cams == 1:
@@ -429,53 +416,52 @@ def process_input(message):
                                 pydirectinput.moveTo(550, 606)
                                 pydirectinput.moveTo(562, 667)
                                 pydirectinput.moveTo(550, 606)
-                                text_stuff(user, "Cameras")
                                 return
 
             # different cams
                 case "cam1a":
                     if cam1a == 1:
-                        camera(cams, 980, 350, "Camera 1a")
+                        camera(cams, 980,350)
 
                 case "cam1b":
                     if cam1b == 1:
-                        camera(cams, 980, 400, "Camera 1b")
+                        camera(cams, 980,400)
 
                 case "cam1c":
                     if cam1c == 1:
-                        camera(cams, 920, 480, "Camera 1c")
+                        camera(cams, 920,480)
 
                 case "cam2a":
                     if cam2a == 1:
-                        camera(cams, 980, 600, "Camera 2a")
+                        camera(cams, 980,600)
 
                 case "cam2b":
                     if cam2b == 1:
-                        camera(cams, 980, 650, "Camera 2b")
+                        camera(cams, 980,650)
 
                 case "cam3":
                     if cam3 == 1:
-                        camera(cams, 900, 580, "Camera 3")
+                        camera(cams, 900,580)
 
                 case "cam4a":
                     if cam4a == 1:
-                        camera(cams, 1080, 600, "Camera 4a")
+                        camera(cams, 1080,600)
 
                 case "cam4b":
                     if cam4b == 1:
-                        camera(cams, 1080, 650, "Camera 4b")
+                        camera(cams, 1080,650)
 
                 case "cam5":
                     if cam5 == 1:
-                        camera(cams, 850, 430, "Camera 5")
+                        camera(cams, 850,430)
 
                 case "cam6":
                     if cam6 == 1:
-                        camera(cams, 1200, 570, "Camera 6")
+                        camera(cams, 1200,570)
 
                 case "cam7":
                     if cam7 == 1:
-                        camera(cams, 1200, 430, "Camera 7")
+                        camera(cams, 1200,430)
 
             # boop Freddy's nose - "the most important control"
                 case "boop":
@@ -487,15 +473,12 @@ def process_input(message):
                                     mouse.click('left')
                                     print('boop!')
                                     pydirectinput.moveTo(3, 455)
-                                    text_stuff(user, "Boop!")
 
 # -----------------------------------------------------------------------------------------------------------------------
 # threading
 
 t1 = threading.Thread(target=twitch)
 t2 = threading.Thread(target=hotkey)
-t3 = threading.Thread(target=display)
 
 t1.start()
 t2.start()
-t3.start()
