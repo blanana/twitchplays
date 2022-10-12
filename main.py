@@ -1,16 +1,12 @@
-import time
-import socket
-import random
 import userinfo
-import keyboard
-import threading
-
+from time import sleep
+from socket import socket
+from random import randint
+from keyboard import is_pressed
+from threading import Thread
 from input_handler import InputHandler, InputKey, EventKind
 
-message = ' '
-user = ' '
-stop = 1
-ran = 0
+message, user, stop, ran = ' ', ' ', 1, 0
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -20,16 +16,13 @@ PASS = userinfo.PASS
 BOT = userinfo.BOT
 CHANNEL = userinfo.CHANNEL
 OWNER = userinfo.OWNER
-irc = socket.socket()
+irc = socket()
 irc.connect((SERVER, PORT))
 irc.send(("PASS " + PASS + "\n" +
           "NICK " + BOT + "\n" +
           "JOIN #" + CHANNEL + "\n").encode())
 
 # -----------------------------------------------------------------------------------------------------------------------
-
-input_handler = InputHandler()
-input_handler.run()
 
 def twitch():
 
@@ -103,17 +96,17 @@ def twitch():
 def toggle(var, text, val, a, b):
     if var == a:
         print(text + ' disabled')
-        time.sleep(val)
+        sleep(val)
         return b
     else:
         print(text + ' enabled')
-        time.sleep(val)
+        sleep(val)
         return a
 
 def ActionChance(x,y):
     global ran
     if ran == 1:
-        chance = random.randint(x,y)
+        chance = randint(x,y)
         return chance
     else:
         chance = 4
@@ -122,19 +115,17 @@ def ActionChance(x,y):
 # -----------------------------------------------------------------------------------------------------------------------
 
 def hotkey():
-    global stop
-    global ran
+    global stop, ran
     while True:
-        if keyboard.is_pressed('l'):
+        if is_pressed('l'):
             stop = toggle(stop, "Commands", 0.2, 0, 1)
 
-        if keyboard.is_pressed('7'):
+        if is_pressed('7'):
             ran = toggle(ran, "Chance", 0.2, 1, 0)
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 def process_input(message):
-
     message_parts = message.split(" ")
 
     try:
@@ -200,8 +191,8 @@ def process_input(message):
 
 # -----------------------------------------------------------------------------------------------------------------------
 
-t1 = threading.Thread(target=twitch)
-t2 = threading.Thread(target=hotkey)
+Thread(target=twitch).start()
+Thread(target=hotkey).start()
 
-t1.start()
-t2.start()
+input_handler = InputHandler()
+input_handler.run()
