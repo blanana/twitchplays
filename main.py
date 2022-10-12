@@ -1,38 +1,16 @@
-import time
-import mouse
-import socket
-import random
 import userinfo
-import keyboard
-import threading
 import pydirectinput
+from time import sleep
+from mouse import click
+from socket import socket
+from random import randint
+from keyboard import is_pressed
+from threading import Thread
+from pydirectinput import moveTo
 
-message = ' '
-user = ' '
-
-direction = 2
-stop = 1
-cams = 0
-ran = 0
-
-Ldoor   = 0
-Rdoor   = 0
-Llight  = 0
-Rlight  = 0
-cameras = 0
-boop    = 0
-
-cam1a = 0
-cam1b = 0
-cam1c = 0
-cam2a = 0
-cam2b = 0
-cam3  = 0
-cam4a = 0
-cam4b = 0
-cam5  = 0
-cam6  = 0
-cam7  = 0
+message, user, direction, stop, cams, ran = ' ', ' ', 2, 1, 0, 0
+ld, rd, ll, rl, cameras, boop = 0, 0, 0, 0, 0, 0
+cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 pydirectinput.FAILSAFE = False
 
@@ -44,7 +22,7 @@ PASS = userinfo.PASS
 BOT = userinfo.BOT
 CHANNEL = userinfo.CHANNEL
 OWNER = userinfo.OWNER
-irc = socket.socket()
+irc = socket()
 irc.connect((SERVER, PORT))
 irc.send(("PASS " + PASS + "\n" +
           "NICK " + BOT + "\n" +
@@ -126,137 +104,100 @@ def twitch():
 
 def camera(cam, x, y):
     if cam == 1:
-        pydirectinput.moveTo(x, y)
-        mouse.click('left')
+        moveTo(x, y)
+        click('left')
 
 def ActionChance(x,y):
     global ran
     if ran == 1:
-        chance = random.randint(x,y)
+        chance = randint(x,y)
         return chance
     else:
         chance = 4
         return chance
 
 def control(com1, com2, x1, y1, x2, y2):
-    if com1 == 1:
-        if com2 == 0:
-            pydirectinput.moveTo(x1, y1)
-            time.sleep(0.44)
-            mouse.click('left')
-            pydirectinput.moveTo(x2, y2)
+    if not com1 == 1 or not com2 == 0:
+        return
+    moveTo(x1, y1)
+    sleep(0.44)
+    click('left')
+    moveTo(x2, y2)
 
 def toggle(var, text, val, a, b):
     if var == a:
         print(text + ' disabled')
-        time.sleep(val)
+        sleep(val)
         return b
     else:
         print(text + ' enabled')
-        time.sleep(val)
+        sleep(val)
         return a
 
 # -----------------------------------------------------------------------------------------------------------------------
 # hotkeys
 
 def hotkey():
-    global direction
-    global stop
-    global cams
-    global ran
-
-    global Ldoor
-    global Rdoor
-    global Llight
-    global Rlight
-    global cameras
-    global boop
-
-    global cam1a
-    global cam1b
-    global cam1c
-    global cam2a
-    global cam2b
-    global cam3
-    global cam4a
-    global cam4b
-    global cam5
-    global cam6
-    global cam7
-
+    global direction, stop, cams, ran
+    global ld, rd, ll, rl, cameras, boop
+    global cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7
     while True:
 
 # ---------------------------------------------------------------------------
 # toggle hotkeys
 
     # Left door toggle
-        if keyboard.is_pressed('1'):
-            Ldoor = toggle(Ldoor, 'Left door', 0.2, 1, 0)
+        if is_pressed('1'):
+            ld = toggle(ld, 'Left door', 0.2, 1, 0)
 
     # Right door toggle
-        if keyboard.is_pressed('2'):
-            Rdoor = toggle(Rdoor, 'Right door', 0.2, 1, 0)
+        if is_pressed('2'):
+            rd = toggle(rd, 'Right door', 0.2, 1, 0)
 
     # Left light toggle
-        if keyboard.is_pressed('3'):
-            Llight = toggle(Llight, 'Left light', 0.2, 1, 0)
+        if is_pressed('3'):
+            ll = toggle(ll, 'Left light', 0.2, 1, 0)
 
     # Right light toggle
-        if keyboard.is_pressed('4'):
-            Rlight = toggle(Rlight, 'Right light', 0.2, 1, 0)
+        if is_pressed('4'):
+            rl = toggle(rl, 'Right light', 0.2, 1, 0)
 
     # Camera toggle
-        if keyboard.is_pressed('5'):
+        if is_pressed('5'):
             cameras = toggle(cameras, 'Cameras', 0.2, 1, 0)
 
     # Boop toggle
-        if keyboard.is_pressed('6'):
+        if is_pressed('6'):
             boop = toggle(boop, 'Boop', 0.2, 1, 0)
 
     # Chance toggle
-        if keyboard.is_pressed('7'):
+        if is_pressed('7'):
             ran = toggle(ran, 'Chance', 0.2, 1, 0)
 
     # command toggle
-        if keyboard.is_pressed('l'):
+        if is_pressed('l'):
             stop = toggle(stop, 'Commands', 0.2, 0, 1)
 
     # reset
-        if keyboard.is_pressed('r'):
-            cams = 0
-            direction = 0
-            Ldoor = 0
-            Rdoor = 0
-            Llight  = 0
-            Rlight  = 0
-            cameras = 0
-            boop  = 0
-            cam1a = 0
-            cam1b = 0
-            cam1c = 0
-            cam2a = 0
-            cam2b = 0
-            cam3  = 0
-            cam4a = 0
-            cam4b = 0
-            cam5  = 0
-            cam6  = 0
-            cam7  = 0
+        if is_pressed('r'):
+            cams, direction = 0, 2
+            ld, rd, ll, rl, cameras, boop = 0, 0, 0, 0, 0, 0
+            cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             print('reset')
-            time.sleep(0.5)
+            sleep(0.5)
 
     # test
-        if keyboard.is_pressed('t'):
+        if is_pressed('t'):
             print("                    ")
             print("direction:" + str(direction))
             print("cams:"      + str(cams))
             print("chance:"    + str(ran))
             print("stop:"      + str(stop))
             print("--------------------")
-            print("Ldoor:"   + str(Ldoor))
-            print("Rdoor:"   + str(Rdoor))
-            print("Llight:"  + str(Llight))
-            print("Rlight:"  + str(Rlight))
+            print("Ldoor:"   + str(ld))
+            print("Rdoor:"   + str(rd))
+            print("Llight:"  + str(ll))
+            print("Rlight:"  + str(rl))
             print("cameras:" + str(cameras))
             print("boop:"    + str(boop))
             print("--------------------")
@@ -272,37 +213,16 @@ def hotkey():
             print("cam6:"  + str(cam6))
             print("cam7:"  + str(cam7))
             print("                    ")
-            time.sleep(0.5)
+            sleep(0.5)
 
 # -----------------------------------------------------------------------------------------------------------------------
 # game control
 
 def process_input(message):
 
-    global user
-
-    global direction
-    global cams
-    global stop
-
-    global Ldoor
-    global Rdoor
-    global Llight
-    global Rlight
-    global cameras
-    global boop
-
-    global cam1a
-    global cam1b
-    global cam1c
-    global cam2a
-    global cam2b
-    global cam3
-    global cam4a
-    global cam4b
-    global cam5
-    global cam6
-    global cam7
+    global user, direction, stop, cams, ran
+    global ld, rd, ll, rl, cameras, boop
+    global cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7
 
 # ---------------------------------------------------------------------------
 
@@ -344,31 +264,11 @@ def process_input(message):
                     cam7  = toggle(cam7, 'Camera 7', 0)
 
                 case "e_cam_all":
-                    cam1a = 1
-                    cam1b = 1
-                    cam1c = 1
-                    cam2a = 1
-                    cam2b = 1
-                    cam3  = 1
-                    cam4a = 1
-                    cam4b = 1
-                    cam5  = 1
-                    cam6  = 1
-                    cam7  = 1
+                    cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7 = 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
                     print('all cams enabled')
 
                 case "d_cam_all":
-                    cam1a = 0
-                    cam1b = 0
-                    cam1c = 0
-                    cam2a = 0
-                    cam2b = 0
-                    cam3  = 0
-                    cam4a = 0
-                    cam4b = 0
-                    cam5  = 0
-                    cam6  = 0
-                    cam7  = 0
+                    cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                     print('all cams enabled')
 
 # ---------------------------------------------------------------------------
@@ -380,43 +280,42 @@ def process_input(message):
                 case "ldoor":
                     if ActionChance(1,4) == 4:
                         direction = 1
-                        control(Ldoor, cams,      55, 355,     3, 455)
+                        control(ld, cams, 55,355, 3,455)
 
             # Right door
                 case "rdoor":
                     if ActionChance(1,4) == 4:
                         direction = 2
-                        control(Rdoor, cams,      1210, 350,   1278, 455)
+                        control(rd, cams, 1210,350, 1278,455)
 
             # Left light
                 case "llight":
                     if ActionChance(1,4) == 4:
                         direction = 1
-                        control(Llight, cams,     55, 455,     3, 455)
+                        control(ll, cams, 55,455, 3,455)
 
             # Right light
                 case "rlight":
                     if ActionChance(1,4) == 4:
                         direction = 2
-                        control(Rlight, cams,     1210, 470,   1278, 455)
+                        control(rl, cams, 1210,470, 1278,455)
 
             # general camera
                 case "cams":
-                    if ActionChance(1,4) == 4:
-                        if cameras == 1:
-                            if cams == 0:
-                                cams = 1
-                                pydirectinput.moveTo(550, 606)
-                                pydirectinput.moveTo(562, 700)
-                                pydirectinput.moveTo(550, 606)
-                                return
-
-                            if cams == 1:
-                                cams = 0
-                                pydirectinput.moveTo(550, 606)
-                                pydirectinput.moveTo(562, 667)
-                                pydirectinput.moveTo(550, 606)
-                                return
+                    if not ActionChance(1,4) == 4 or not cameras == 1:
+                        return
+                    if cams == 0:
+                        cams = 1
+                        moveTo(550,606)
+                        moveTo(562,700)
+                        moveTo(550,606)
+                        return
+                    if cams == 1:
+                        cams = 0
+                        moveTo(550,606)
+                        moveTo(562,667)
+                        moveTo(550,606)
+                        return
 
             # different cams
                 case "cam1a":
@@ -465,20 +364,15 @@ def process_input(message):
 
             # boop Freddy's nose - "the most important control"
                 case "boop":
-                    if ActionChance(1,4) == 4:
-                        if boop == 1:
-                            if direction == 1:
-                                if cams == 0:
-                                    pydirectinput.moveTo(679, 236)
-                                    mouse.click('left')
-                                    print('boop!')
-                                    pydirectinput.moveTo(3, 455)
+                    if not ActionChance(1,4) == 4 or not boop == 1 or not direction == 1 or not cams == 0:
+                        return
+                    moveTo(679,236)
+                    click('left')
+                    print('boop!')
+                    moveTo(3,455)
 
 # -----------------------------------------------------------------------------------------------------------------------
 # threading
 
-t1 = threading.Thread(target=twitch)
-t2 = threading.Thread(target=hotkey)
-
-t1.start()
-t2.start()
+Thread(target=twitch).start()
+Thread(target=hotkey).start()
