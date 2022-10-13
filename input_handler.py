@@ -1,7 +1,9 @@
 from time import sleep, time
-from keyboard import press, release
-from threading import Thread
 from enum import Enum, auto
+from keyboard import press, release
+from threading import Thread, Lock
+
+mutex = Lock()
 
 class InputKey(Enum):
     W     = auto()
@@ -59,9 +61,11 @@ class InputHandler:
         self.events = []
 
     def register_event(self, time_offset: float, key: InputKey, event_kind: EventKind):
+        mutex.acquire()
         new_time = time() + time_offset
         event = Event(new_time, key, event_kind)
         self.events.append(event)
+        mutex.release()
 
     def register_keypress(self, start_offset: float, duration: float, key: InputKey):
         if len(self.events) < 10:
@@ -81,7 +85,7 @@ class InputHandler:
     def __run_threaded(self):
         while True:
             current_time = time()
-
+            mutex.acquire()
             for index, event in enumerate(self.events):
                 if event.time < current_time:
                     print(str(event))
@@ -90,10 +94,11 @@ class InputHandler:
                     elif event.event_kind is EventKind.RELEASE:
                         self.release(event.key)
                     self.events.pop(index)
+            mutex.release()
             sleep(0.01)
 
     def press(self, key: InputKey):
         press(key.to_str())
     
     def release(self, key: InputKey):
-        release(key.to_str())
+        release(key.to_str())  
