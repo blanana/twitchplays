@@ -23,6 +23,7 @@ irc.send(("PASS " + PASS + "\n" +
           "JOIN #" + CHANNEL + "\n").encode())
 
 # -----------------------------------------------------------------------------------------------------------------------
+# twitch
 
 def twitch():
 
@@ -92,6 +93,7 @@ def twitch():
                 process_input(message)
 
 # -----------------------------------------------------------------------------------------------------------------------
+# functions
 
 def toggle(var, text, val, a, b):
     if var == a:
@@ -104,7 +106,6 @@ def toggle(var, text, val, a, b):
         return a
 
 def ActionChance(x,y):
-    global ran
     if ran == 1:
         chance = randint(x,y)
         return chance
@@ -113,17 +114,19 @@ def ActionChance(x,y):
         return chance
 
 # -----------------------------------------------------------------------------------------------------------------------
+# hotkey
 
 def hotkey():
     global stop, ran
     while True:
         if is_pressed('l'):
             stop = toggle(stop, "Commands", 0.2, 0, 1)
-
+            input_handler.stop_all()
         if is_pressed('7'):
             ran = toggle(ran, "Chance", 0.2, 1, 0)
 
 # -----------------------------------------------------------------------------------------------------------------------
+# process input
 
 def process_input(message):
     message_parts = message.split(" ")
@@ -190,6 +193,7 @@ def process_input(message):
                         input_handler.stop_all()
 
 # -----------------------------------------------------------------------------------------------------------------------
+# threading
 
 Thread(target=twitch).start()
 Thread(target=hotkey).start()
