@@ -182,7 +182,7 @@ def hotkey():
         if is_pressed('r'):
             cams, direction = 0, 2
             ld, rd, ll, rl, cameras, boop = 0, 0, 0, 0, 0, 0
-            cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            cam1a, cam1b, cam1c, cam2a, cam2b, cam3, cam4a, cam4b, cam5, cam6, cam7 = 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
             print('reset')
             sleep(0.5)
 
@@ -227,7 +227,7 @@ def process_input(message):
 # ---------------------------------------------------------------------------
 
     if user.lower() == 'blanana_m' or 'astralspiff':
-        match message.lower():
+        match str(message).lower():
 
         # toggle individual cameras
                 case "t_cam1a":
@@ -274,7 +274,7 @@ def process_input(message):
 # ---------------------------------------------------------------------------
 
     if stop == 0:
-        match message.lower():
+        match str(message).lower():
 
             # Left door
                 case "ldoor":
