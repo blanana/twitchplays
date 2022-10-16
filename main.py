@@ -134,7 +134,7 @@ def hotkey():
 # process input
 
 def process_input(message):
-    message_parts = message.split(" ")
+    message_parts = str(message).split(" ")
 
     try:
         command = message_parts[0].lower()
@@ -183,7 +183,7 @@ def process_input(message):
 
     except (ValueError, IndexError):
         if stop == 0:
-            match message.lower():
+            match str(message).lower():
                 case "jump":
                     input_handler.register_keypress(0, 0.2, InputKey.SPACE)
 
