@@ -30,7 +30,8 @@ L - toggles commands
 4 - toggles Right light
 5 - toggles cameras
 6 - toggles boop
-7 - toggles 1/4 chance
+7 - toggles command Chance (normally 1/4)
+all are off on startup
 
 other chat commands (can only be used by certain people):
 t_cam1a
@@ -45,7 +46,7 @@ t_cma5
 t_cam6
 t_cam7 - toggles the camera commands individually 
 
-e_cam_all -  enables all cams
+e_cam_all - enables all cams
 d_cam_all - disables all cams
 
 All commands are toggled off on startup
