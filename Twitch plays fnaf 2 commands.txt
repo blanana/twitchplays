@@ -1,0 +1,50 @@
+Rlight - holds Right Light for 0.2 seconds
+Llight - holds Left Light for 0.2 seconds
+Light  - holds middle/cam light for 0.2 seconds
+mask   - puts mask on/off
+cams   - opens/closes cams
+boop   - boops Freddy's nose
+
+cam1  - selects cam 1
+cam2  - selects cam 2
+cam3  - selects cam 3
+cam4  - selects cam 4
+cam5  - selects cam 5
+cam6  - selects cam 6
+cam7  - selects cam 7
+cam8  - selects cam 8
+cam9  - selects cam 9
+cam10 - selects cam 10
+cam11 - selects cam 11
+cam12 - selects cam 12
+
+wind - winds music box on cam 11
+
+
+----------------------------------------------
+hotkeys:
+L - toggles Commands
+1 - toggles Left light
+2 - toggles Right light
+3 - toggles Main light
+4 - toggles Cameras
+5 - toggles boop
+6 - toggles mask
+7 - toggles command Chance (normally 1/4)
+all are off on startup
+
+t_cam1  - toggles cam 1
+t_cam2  - toggles cam 2
+t_cam3  - toggles cam 3
+t_cam4  - toggles cam 4
+t_cam5  - toggles cam 5
+t_cam6  - toggles cam 6
+t_cam7  - toggles cam 7
+t_cam8  - toggles cam 8
+t_cam9  - toggles cam 9
+t_cam10 - toggles cam 10
+t_cam11 - toggles cam 11
+t_cam12 - toggles cam 12
+
+e_cam_all - enables all cams
+d_cam_all - disables all cams
