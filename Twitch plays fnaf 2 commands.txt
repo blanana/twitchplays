@@ -1,9 +1,9 @@
 Rlight - holds Right Light for 0.2 seconds
 Llight - holds Left Light for 0.2 seconds
 Light  - holds middle/cam light for 0.2 seconds
-mask   - puts mask on/off
-cams   - opens/closes cams
-boop   - boops Freddy's nose
+
+mask - puts mask on/off
+cams - opens/closes cams
 
 cam1  - selects cam 1
 cam2  - selects cam 2
@@ -19,11 +19,12 @@ cam11 - selects cam 11
 cam12 - selects cam 12
 
 wind - winds music box on cam 11
-
+boop - boops Freddy's nose
 
 ----------------------------------------------
 hotkeys:
 L - toggles Commands
+
 1 - toggles Left light
 2 - toggles Right light
 3 - toggles Main light
@@ -33,6 +34,7 @@ L - toggles Commands
 7 - toggles command Chance (normally 1/4)
 all are off on startup
 
+other chat commands (can only be used by certain people):
 t_cam1  - toggles cam 1
 t_cam2  - toggles cam 2
 t_cam3  - toggles cam 3
@@ -48,3 +50,8 @@ t_cam12 - toggles cam 12
 
 e_cam_all - enables all cams
 d_cam_all - disables all cams
+
+All commands are toggled off on startup
+Random Chance is toggled off on startup
+L toggles all commands without toggling the variables
+start on the left
