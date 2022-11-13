@@ -119,13 +119,11 @@ def toggle(var, text, val, a, b):
         sleep(val)
         return a
 
-
 def ActionChance(x,y):
     if main[3] == 1:
         return randint(x,y)
     else:
         return 4
-
 
 def control(com1, com2, x1, y1, x2, y2):
     if com1 == 1 and com2 == 0:
@@ -134,12 +132,10 @@ def control(com1, com2, x1, y1, x2, y2):
             click('left')
             moveTo(x2, y2)
 
-
 def camera(com1, com2, x1, y1):
     if com1 == 1 and com2 == 1:
             moveTo(x1, y1)
             click('left')
-
 
 def cams(z, x, y, x1, y1):
     moveTo(x, y)
@@ -158,22 +154,16 @@ def hotkey():
 
         if is_pressed('1'):
             controls[0] = toggle(controls[0], 'Left door', 0.2, 1, 0)
-
         if is_pressed('2'):
             controls[1] = toggle(controls[1], 'Right door', 0.2, 1, 0)
-
         if is_pressed('3'):
             controls[2] = toggle(controls[2], 'Left light', 0.2, 1, 0)
-
         if is_pressed('4'):
             controls[3] = toggle(controls[3], 'Right light', 0.2, 1, 0)
-
         if is_pressed('5'):
             controls[4] = toggle(controls[4], 'Cameras', 0.2, 1, 0)
-
         if is_pressed('6'):
             controls[5] = toggle(controls[5], 'boop', 0.2, 1, 0)
-
         if is_pressed('7'):
             main[3] = toggle(main[3], 'Chance', 0.2, 1, 0)
 
@@ -186,42 +176,31 @@ def process_input(message):
 
             case "t_cam1a":
                 cameras[0]  = toggle(cameras[0], 'Camera 1a', 0, 1, 0)
-
             case "t_cam1b":
                 cameras[1]  = toggle(cameras[1], 'Camera 1b', 0, 1, 0)
-
             case "t_cam1c":
                 cameras[2]  = toggle(cameras[2], 'Camera 1c', 0, 1, 0)
-
             case "t_cam2a":
                 cameras[3]  = toggle(cameras[3], 'Camera 2a', 0, 1, 0)
-
             case "t_cam2b":
                 cameras[4]  = toggle(cameras[4], 'Camera 2b', 0, 1, 0)
-
             case "t_cam3":
                 cameras[5]  = toggle(cameras[5], 'Camera 3', 0, 1, 0)
-
             case "t_cam4a":
                 cameras[6]  = toggle(cameras[6], 'Camera 4a', 0, 1, 0)
-
             case "t_cam4b":
                 cameras[7]  = toggle(cameras[7], 'Camera 4b', 0, 1, 0)
-
             case "t_cam5":
                 cameras[8]  = toggle(cameras[8], 'Camera 5', 0, 1, 0)
-            
             case "t_cam6":
                 cameras[9]  = toggle(cameras[9], 'Camera 6', 0, 1, 0)
-
             case "t_cam7":
                 cameras[10] = toggle(cameras[10], 'Camera 7', 0, 1, 0)
 
             case "e_cam_all":
                 cameras = 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
                 print('all cameras enabled')
-
-            case "1_cam_all":
+            case "d_cam_all":
                 cameras = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 print('all cameras disabled')
 
@@ -248,7 +227,6 @@ def process_input(message):
                         main[0] = 2
                         control(controls[3], main[2], 1210, 470, 1278, 455)
 
-
                 case "cams":
                     if controls[4] == 1 and ActionChance(1,4) == 4:
                             if main[2] == 0:
@@ -257,40 +235,28 @@ def process_input(message):
                             if main[2] == 1:
                                 main[2] = cams(0, 550, 606, 562, 700)
 
-
                 case "cam1a":
                     camera(cameras[0], main[3], 980, 350)
-
                 case "cam1b":
                     camera(cameras[1], main[3], 980, 350)
-
                 case "cam1c":
                     camera(cameras[2], main[3], 980, 350)
-
                 case "cam2a":
                     camera(cameras[3], main[3], 980, 350)
-
                 case "cam2b":
                     camera(cameras[4], main[3], 980, 350)
-
                 case "cam3":
                     camera(cameras[5], main[3], 980, 350)
-
                 case "cam4a":
                     camera(cameras[6], main[3], 980, 350)
-
                 case "cam4b":
                     camera(cameras[7], main[3], 980, 350)
-
                 case "cam5":
                     camera(cameras[8], main[3], 980, 350)
-
                 case "cam6":
                     camera(cameras[9], main[3], 980, 350)
-
                 case "cam7":
                     camera(cameras[10], main[3], 980, 350)
-
 
                 case "boop":
                     if controls[5] == 1 and main[2] == 0 and ActionChance(1,4) == 4:
