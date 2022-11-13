@@ -23,8 +23,6 @@ boop - boops Freddy's nose
 --------------------------------------------------------
 Hotkeys:
 L - toggles commands
-R - resets variables
-T - prints all variables
 
 1 - toggles Left door
 2 - toggles Right door
